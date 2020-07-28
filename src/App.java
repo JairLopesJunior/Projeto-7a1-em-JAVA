@@ -27,9 +27,6 @@ public class App {
 				String codigo = scan.next();
 				album.setCodigo(codigo);
 				conta.salvar(album);
-				System.out.println("\n**********************************");
-				System.out.println("Album adquirido com sucesso");
-				System.out.println("**********************************");
 			}
 			
 			if(opcao == 2) {
@@ -56,17 +53,24 @@ public class App {
 				if (contaEncontrada != null) {
 					System.out.println("Informe o numero da Figurinha:");
 					String fig = scan.next();
-					Figurinha figEncontrada = album.verificarFigurinhaExiste(fig);
-					figurinha.setNumero(fig);
-					if(figEncontrada != null) {
-						System.out.println("\n**********************************");
-						System.out.printf("Você já possui a figurinha numero %s", fig + "\n");
-						System.out.println("**********************************");
+					Boolean numeroValidado = album.validarNumero(fig);
+					if(numeroValidado == true) {
+						System.out.println("\n*****************************************");
+						System.out.printf("A figurinha numero %s informada é invalida", fig);
+						System.out.println("\n*****************************************");
 					}else {
-						album.colarFigurinha(figurinha);
-						System.out.println("\n**********************************");
-						System.out.printf("Figurinha numero %s", fig + " adicionada ao album\n");
-						System.out.println("**********************************");
+						Figurinha figEncontrada = album.verificarFigurinhaExiste(fig);
+						figurinha.setNumero(fig);
+						if(figEncontrada != null) {
+							System.out.println("\n**********************************");
+							System.out.printf("Você já possui a figurinha numero %s", fig + "\n");
+							System.out.println("**********************************");
+						}else {
+							album.colarFigurinha(figurinha);
+							System.out.println("\n**********************************");
+							System.out.printf("Figurinha numero %s", fig + " adicionada ao album\n");
+							System.out.println("**********************************");
+						}
 					}
 				}else {
 					System.out.println("\n**********************************");

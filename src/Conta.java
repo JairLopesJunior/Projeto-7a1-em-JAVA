@@ -17,7 +17,16 @@ public class Conta {
 	}
 	
 	public void salvar(Album album){
-		albuns.add(album);
+		if(!albuns.contains(album)) {
+			albuns.add(album);
+			System.out.println("\n*****************************************************");
+			System.out.println("Album adquirido com sucesso");
+			System.out.println("*****************************************************");
+		}else {
+			System.out.println("\n*****************************************************");
+			System.out.println("Desculpe, o codigo desse album já foi adquirido");
+			System.out.println("*****************************************************");
+		}
 	}
 
 	public List<Album> getAlbuns() {

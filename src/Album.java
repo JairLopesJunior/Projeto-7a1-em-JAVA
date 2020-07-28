@@ -26,6 +26,14 @@ public class Album {
 		return null;
 	}
 	
+	public boolean validarNumero(String numero) {
+		int num = Integer.parseInt(numero);
+		if(num <= 0 || num > 681) {
+			return true;
+		}
+		return false;
+	}
+	
 	public Figurinha encontrarFigurinhas(String figurinha) {
 		for(Figurinha f : figurinhas){
 			String fig = f.getNumero();
