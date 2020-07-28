@@ -19,6 +19,7 @@ public class App {
 			System.out.println("1. Comprar Album.");
 			System.out.println("2. Ver Album.");
 			System.out.println("3. Colar Figurinha.");
+			System.out.println("4. Verificar se a Figurinha esta colada.");
 			System.out.println("0. Sair.");
 			opcao = scan.nextInt();
 			
@@ -35,6 +36,9 @@ public class App {
 				Album contaEncontrada = conta.encontrar(cpfTitular);
 				if (contaEncontrada != null) {
 					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
+					System.out.println("\n**********************************");
+					System.out.println("Figurinhas já obtidas");
+					System.out.println("**********************************");
 					for(Figurinha a : listFig) {
 						System.out.println("Numero: " + a.getNumero());
 					}
@@ -76,6 +80,30 @@ public class App {
 					System.out.println("\n**********************************");
 					System.out.println("Album não Encontrada");
 					System.out.println("**********************************");
+				}
+			}
+			
+			if(opcao == 4) {
+				System.out.println("Informe o seu codigo: ");	
+				String codTitular = scan.next();
+				Album contaEncontrada = conta.encontrar(codTitular);
+				if (contaEncontrada != null) {
+					System.out.println("Informe o numero da figurinha: ");	
+					String figura = scan.next();
+					Figurinha figurinhaVerificada = album.verificarFigurinhaExiste(figura);
+					if(figurinhaVerificada != null) {
+						System.out.println("\n**********************************");
+						System.out.printf("Voçe ja possui a figurinha numero %s ", figura);
+						System.out.println("\n**********************************");
+					}else {
+						System.out.println("\n**********************************");
+						System.out.printf("Voçe não possui a figurinha numero %s ", figura);
+						System.out.println("\n**********************************");
+					}
+				}else {
+					System.out.println("\n**********************************");
+					System.out.println("Album não encontrado");
+					System.out.println("\n**********************************");
 				}
 			}
 			
