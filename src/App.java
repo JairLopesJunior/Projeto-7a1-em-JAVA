@@ -9,7 +9,6 @@ public class App {
 		
 		Album album = new Album();
 		Conta conta = new Conta();
-		Figurinha figurinha = new Figurinha();
 		scan = new Scanner(System.in);
 		int opcao;
 		
@@ -40,7 +39,7 @@ public class App {
 				if (contaEncontrada != null) {
 					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
 					for(Figurinha a : listFig) {
-						System.out.println("Figurinha: " + a.getFigurinha());
+						System.out.println("Numero: " + a.getNumero());
 					}
 				}else {
 					System.out.println("\n**********************************");
@@ -50,23 +49,23 @@ public class App {
 			}
 			
 			if(opcao == 3) {
+				Figurinha figurinha = new Figurinha();
 				System.out.println("Informe o seu codigo: ");	
-				String cpfTitular = scan.next();
-				Album contaEncontrada = conta.encontrar(cpfTitular);
+				String codTitular = scan.next();
+				Album contaEncontrada = conta.encontrar(codTitular);
 				if (contaEncontrada != null) {
 					System.out.println("Informe o numero da Figurinha:");
 					String fig = scan.next();
-					figurinha.setFigurinha(fig);
-					Figurinha a = album.encontrarFigurinhas(fig);
-					System.out.println(a);
-					if(a != null) {
-						album.colarFigurinha(figurinha);
+					Figurinha figEncontrada = album.verificarFigurinhaExiste(fig);
+					figurinha.setNumero(fig);
+					if(figEncontrada != null) {
 						System.out.println("\n**********************************");
-						System.out.println("Figurinha colada com sucesso");
+						System.out.printf("Você já possui a figurinha numero %s", fig + "\n");
 						System.out.println("**********************************");
 					}else {
+						album.colarFigurinha(figurinha);
 						System.out.println("\n**********************************");
-						System.out.println("Você já possui esta figurinha");
+						System.out.printf("Figurinha numero %s", fig + " adicionada ao album\n");
 						System.out.println("**********************************");
 					}
 				}else {

@@ -1,14 +1,16 @@
 
 public class Figurinha {
 	
-	private String figurinha;
-	
-	public String getFigurinha() {
-		return figurinha;
+	private String numero;
+
+	public String getNumero() {
+		return numero;
 	}
 
-	public void setFigurinha(String figurinha) {
-		this.figurinha = figurinha;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
+	
+	
 }
 

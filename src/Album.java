@@ -3,37 +3,32 @@ import java.util.List;
 
 public class Album {
 	
-	private String codigo;
-	
 	private List<Figurinha> figurinhas = new ArrayList<Figurinha>(681);
-
-	public Figurinha figursinhas() {
-		for(Figurinha f : figurinhas){
-			return f;
-		}
-		return null;
-	}
+	
+	private String codigo;
+	private Figurinha Figurinha;
 	
 	public List<Figurinha> getAlbum() {
 		return figurinhas;
 	}
 	
-	public void colarFigurinha(Figurinha fig) {
-		figurinhas.add(fig);
+	public void colarFigurinha(Figurinha figurinha) {
+		figurinhas.add(figurinha);
 	}
 	
-	public void verificarExistencia(String figurinha) {
+	public Figurinha verificarFigurinhaExiste(String num) {
 		for(Figurinha f : figurinhas) {
-			String fig = f.getFigurinha();
-			if(figurinha.equals(fig)) {
-				System.out.println("OK");
+			String numero = f.getNumero();
+			if(numero.equals(num)) {
+				return f;
 			}
 		}
+		return null;
 	}
 	
 	public Figurinha encontrarFigurinhas(String figurinha) {
 		for(Figurinha f : figurinhas){
-			String fig = f.getFigurinha();
+			String fig = f.getNumero();
 			if(figurinha.equals(fig)) {
 				return f;
 			}
@@ -55,6 +50,14 @@ public class Album {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public Figurinha getFigurinha() {
+		return Figurinha;
+	}
+
+	public void setFigurinha(Figurinha figurinha) {
+		Figurinha = figurinha;
 	}
 
 }
