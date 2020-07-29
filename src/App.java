@@ -17,9 +17,10 @@ public class App {
 			System.out.println("Projeto 7 a 1 em JAVA");
 			System.out.println("===================================");
 			System.out.println("1. Comprar Album.");
-			System.out.println("2. Ver Album.");
+			System.out.println("2. Listar as figurinhas coladas.");
 			System.out.println("3. Colar Figurinha.");
 			System.out.println("4. Verificar se a Figurinha esta colada.");
+			System.out.println("5. Listar as figurinhas que faltam.");
 			System.out.println("0. Sair.");
 			opcao = scan.nextInt();
 			
@@ -104,6 +105,34 @@ public class App {
 					System.out.println("\n**********************************");
 					System.out.println("Album não encontrado");
 					System.out.println("\n**********************************");
+				}
+			}
+			
+			if(opcao == 5) {
+				String s;
+				int i;
+				System.out.println("Informe o seu codigo: ");	
+				String codTitular = scan.next();
+				Album contaEncontrada = conta.encontrar(codTitular);
+				if (contaEncontrada != null) {
+					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
+					System.out.println("\n**********************************");
+					System.out.println("Figurinhas já obtidas");
+					System.out.println("**********************************");
+					for(i = 1; i <= 681; i++) {
+						s = Integer.toString(i);
+						for(Figurinha a : listFig) {
+							if(s.equals(a.getNumero())) {
+								s = "";
+							}else {
+								System.out.println("Numero: " + s);
+							}
+						}
+					}
+				}else {
+					System.out.println("\n**********************************");
+					System.out.println("Album não Encontrada");
+					System.out.println("**********************************");
 				}
 			}
 			

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Album {
 	
@@ -7,6 +8,7 @@ public class Album {
 	
 	private String codigo;
 	private Figurinha Figurinha;
+	Scanner scan = new Scanner(System.in);
 	
 	public List<Figurinha> getAlbum() {
 		return figurinhas;
