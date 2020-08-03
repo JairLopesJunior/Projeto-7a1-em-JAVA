@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Album {
 	
 	private List<Figurinha> figurinhas = new ArrayList<Figurinha>(681);
+	Conta conta =  new Conta();
 	
 	private String codigo;
 	private Figurinha Figurinha;
@@ -16,6 +17,31 @@ public class Album {
 	
 	public void colarFigurinha(Figurinha figurinha) {
 		figurinhas.add(figurinha);
+	}
+	
+	public void verificarFigurinhasFaltantes(Album contaEncontrada){
+		String s = null;
+		int i;
+		if (contaEncontrada != null) {
+		List<Figurinha> listFig = contaEncontrada.getFigurinhas();
+		System.out.println("\n**********************************");
+		System.out.println("Figurinhas que faltam");
+		System.out.println("**********************************");
+		for(i = 1; i <= 681; i++) {
+			for(Figurinha a : listFig) {
+				s = Integer.toString(i);
+			if(s.equals(a.getNumero())) {
+				s = "";
+			}else {
+				System.out.println("Numero: " + (i));
+			}
+			}
+		}
+		}else {
+			System.out.println("\n**********************************");
+			System.out.println("Album não Encontrada");
+			System.out.println("**********************************");
+		}
 	}
 	
 	public Figurinha verificarFigurinhaExiste(String num) {
@@ -69,5 +95,4 @@ public class Album {
 	public void setFigurinha(Figurinha figurinha) {
 		Figurinha = figurinha;
 	}
-
 }

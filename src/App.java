@@ -27,14 +27,24 @@ public class App {
 			if(opcao == 1) {
 				System.out.println("Informe o seu codigo:");
 				String codigo = scan.next();
+				Album albumEncontrado = conta.verificarExistenciaAlbum(codigo);
 				album.setCodigo(codigo);
-				conta.salvar(album);
+				if(albumEncontrado != null) {
+					System.out.println("\n*****************************************************");
+					System.out.println("Desculpe, o codigo desse album já foi adquirido");
+					System.out.println("*****************************************************");
+				}else {
+					conta.salvar(album);
+					System.out.println("\n*****************************************************");
+					System.out.println("Album adquirido com sucesso");
+					System.out.println("*****************************************************");
+				}
 			}
 			
 			if(opcao == 2) {
 				System.out.println("Informe o seu codigo: ");	
-				String cpfTitular = scan.next();
-				Album contaEncontrada = conta.encontrar(cpfTitular);
+				String codTitular = scan.next();
+				Album contaEncontrada = conta.encontrar(codTitular);
 				if (contaEncontrada != null) {
 					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
 					System.out.println("\n**********************************");
@@ -109,31 +119,10 @@ public class App {
 			}
 			
 			if(opcao == 5) {
-				String s;
-				int i;
 				System.out.println("Informe o seu codigo: ");	
 				String codTitular = scan.next();
 				Album contaEncontrada = conta.encontrar(codTitular);
-				if (contaEncontrada != null) {
-					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
-					System.out.println("\n**********************************");
-					System.out.println("Figurinhas já obtidas");
-					System.out.println("**********************************");
-					for(i = 1; i <= 681; i++) {
-						s = Integer.toString(i);
-						for(Figurinha a : listFig) {
-							if(s.equals(a.getNumero())) {
-								s = "";
-							}else {
-								System.out.println("Numero: " + s);
-							}
-						}
-					}
-				}else {
-					System.out.println("\n**********************************");
-					System.out.println("Album não Encontrada");
-					System.out.println("**********************************");
-				}
+				album.verificarFigurinhasFaltantes(contaEncontrada);
 			}
 			
 		}while(opcao != 0);{

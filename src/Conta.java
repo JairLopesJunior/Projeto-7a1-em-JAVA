@@ -7,26 +7,27 @@ public class Conta {
 	
 	private Album album;
 	
-	public Album encontrar(String cpfTitular) {
+	public Album encontrar(String codTitular) {
 		for (Album alb : albuns) {
-			String cpfCorrente = alb.getCodigo();
-			if (cpfCorrente.equals(cpfTitular))
+			if (alb.getCodigo().equals(codTitular)) {
 				return alb;
+			}
 		}
 		return null;
 	}
 	
-	public void salvar(Album album){
-		if(!albuns.contains(album)) {
-			albuns.add(album);
-			System.out.println("\n*****************************************************");
-			System.out.println("Album adquirido com sucesso");
-			System.out.println("*****************************************************");
-		}else {
-			System.out.println("\n*****************************************************");
-			System.out.println("Desculpe, o codigo desse album já foi adquirido");
-			System.out.println("*****************************************************");
+	public Album verificarExistenciaAlbum(String album){
+		for(Album alb : albuns) {
+			String cod = alb.getCodigo();
+			if(cod.equals(album)) {
+				return alb;
+			}
 		}
+		return null;
+	}
+	
+	public void salvar(Album album) {
+		albuns.add(album);
 	}
 
 	public List<Album> getAlbuns() {
