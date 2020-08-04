@@ -8,7 +8,7 @@ public class Album {
 	Conta conta =  new Conta();
 	
 	private String codigo;
-	private Figurinha Figurinha;
+	private Figurinha Figurinhas;
 	Scanner scan = new Scanner(System.in);
 	
 	public List<Figurinha> getAlbum() {
@@ -88,11 +88,9 @@ public class Album {
 		this.codigo = codigo;
 	}
 
-	public Figurinha getFigurinha() {
-		return Figurinha;
+	public void setFigurinhas(Figurinha figurinhas) {
+		Figurinhas = figurinhas;
 	}
 
-	public void setFigurinha(Figurinha figurinha) {
-		Figurinha = figurinha;
-	}
+	
 }

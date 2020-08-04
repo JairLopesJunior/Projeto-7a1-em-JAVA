@@ -25,16 +25,17 @@ public class App {
 			opcao = scan.nextInt();
 			
 			if(opcao == 1) {
+				Album album1 = new Album();
 				System.out.println("Informe o seu codigo:");
 				String codigo = scan.next();
+				album1.setCodigo(codigo);
 				Album albumEncontrado = conta.verificarExistenciaAlbum(codigo);
-				album.setCodigo(codigo);
 				if(albumEncontrado != null) {
 					System.out.println("\n*****************************************************");
 					System.out.println("Desculpe, o codigo desse album já foi adquirido");
 					System.out.println("*****************************************************");
 				}else {
-					conta.salvar(album);
+					conta.salvar(album1);
 					System.out.println("\n*****************************************************");
 					System.out.println("Album adquirido com sucesso");
 					System.out.println("*****************************************************");
@@ -81,7 +82,8 @@ public class App {
 							System.out.printf("Você já possui a figurinha numero %s", fig + "\n");
 							System.out.println("**********************************");
 						}else {
-							album.colarFigurinha(figurinha);
+							contaEncontrada.setFigurinhas(figurinha);
+							contaEncontrada.colarFigurinha(figurinha);
 							System.out.println("\n**********************************");
 							System.out.printf("Figurinha numero %s", fig + " adicionada ao album\n");
 							System.out.println("**********************************");
