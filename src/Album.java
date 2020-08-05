@@ -30,11 +30,11 @@ public class Album {
 		for(i = 1; i <= 681; i++) {
 			for(Figurinha a : listFig) {
 				s = Integer.toString(i);
-			if(s.equals(a.getNumero())) {
-				s = "";
-			}else {
-				System.out.println("Numero: " + (i));
-			}
+				if(s.equals(a.getNumero())) {
+					s = "";
+				}else {
+					System.out.println("Numero: " + (s));
+				}
 			}
 		}
 		}else {
