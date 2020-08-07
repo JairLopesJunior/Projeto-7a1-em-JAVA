@@ -1,16 +1,22 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Album {
 	
 	private List<Figurinha> figurinhas = new ArrayList<Figurinha>(681);
+	private List<FigurinhaRepetida> figurinhasRepetidas = new ArrayList<FigurinhaRepetida>();
 	Conta conta =  new Conta();
-	
 	private String codigo;
 	private Figurinha Figurinhas;
-	Scanner scan = new Scanner(System.in);
+
+	public List<FigurinhaRepetida> getFigurinhasRepetidas() {
+		return figurinhasRepetidas;
+	}
 	
+	public void colarFigurinhasRepetidas(FigurinhaRepetida figurinhaRepetida) {
+		figurinhasRepetidas.add(figurinhaRepetida);
+	}
+
 	public List<Figurinha> getAlbum() {
 		return figurinhas;
 	}
@@ -19,33 +25,18 @@ public class Album {
 		figurinhas.add(figurinha);
 	}
 	
-	public void verificarFigurinhasFaltantes(Album contaEncontrada){
-		String s = null;
-		int i;
-		if (contaEncontrada != null) {
-		List<Figurinha> listFig = contaEncontrada.getFigurinhas();
-		System.out.println("\n**********************************");
-		System.out.println("Figurinhas que faltam");
-		System.out.println("**********************************");
-		for(i = 1; i <= 681; i++) {
-			for(Figurinha a : listFig) {
-				s = Integer.toString(i);
-				if(s.equals(a.getNumero())) {
-					s = "";
-				}else {
-					System.out.println("Numero: " + (s));
-				}
-			}
-		}
-		}else {
-			System.out.println("\n**********************************");
-			System.out.println("Album não Encontrada");
-			System.out.println("**********************************");
-		}
-	}
-	
 	public Figurinha verificarFigurinhaExiste(String num) {
 		for(Figurinha f : figurinhas) {
+			String numero = f.getNumero();
+			if(numero.equals(num)) {
+				return f;
+			}
+		}
+		return null;
+	}
+	
+	public FigurinhaRepetida verificarFigurinhaRepetidaExiste(String num) {
+		for(FigurinhaRepetida f : figurinhasRepetidas) {
 			String numero = f.getNumero();
 			if(numero.equals(num)) {
 				return f;
