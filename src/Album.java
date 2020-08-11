@@ -25,6 +25,10 @@ public class Album {
 		figurinhas.add(figurinha);
 	}
 	
+	public void retirarFigurinhaRepetida(FigurinhaRepetida figurinhaRepetida) {
+		figurinhasRepetidas.remove(figurinhaRepetida);
+	}
+	
 	public Figurinha verificarFigurinhaExiste(String num) {
 		for(Figurinha f : figurinhas) {
 			String numero = f.getNumero();
@@ -39,6 +43,17 @@ public class Album {
 		for(FigurinhaRepetida f : figurinhasRepetidas) {
 			String numero = f.getNumero();
 			if(numero.equals(num)) {
+				return f;
+			}
+		}
+		return null;
+	}
+	
+	public FigurinhaRepetida trocarFigurinhaRepetida(String num) {
+		for(FigurinhaRepetida f : figurinhasRepetidas) {
+			String numero = f.getNumero();
+			if(numero.equals(num)) {
+				retirarFigurinhaRepetida(f);
 				return f;
 			}
 		}

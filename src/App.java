@@ -18,22 +18,25 @@ public class App {
 		int opcao;
 		
 		do {
-			System.out.println("===================================");
+			System.out.println("\n===================================");
 			System.out.println("Projeto 7 a 1 em JAVA");
 			System.out.println("===================================");
 			System.out.println("1. Comprar Album.");
-			System.out.println("2. Listar as figurinhas coladas.");
+			System.out.println("2. Comprar Pacotinho de Figurinhas.");
 			System.out.println("3. Colar Figurinha.");
 			System.out.println("4. Verificar se a Figurinha esta colada.");
-			System.out.println("5. Listar as figurinhas que faltam.");
-			System.out.println("6. Verificar se a figurinha esta colada (Boolean).");
+			System.out.println("5. Verificar se a figurinha esta colada (Boolean).");
+			System.out.println("6. Listar as figurinhas que faltam.");
 			System.out.println("7. Gravar figurinhas que tenho em um arquivo Txt (eu_tenho.txt).");
 			System.out.println("8. Gravar figurinhas que faltam em um arquivo Txt (faltantes.txt).");
-			System.out.println("9. Ler o arquivo txt (eu_tenho.txt).");
-			System.out.println("10. Ler o arquivo txt (faltantes.txt).");
-			System.out.println("11. Ver as figurinhas Repetidas.");
-			System.out.println("12. Verificar se ja tem a figurinha nas repetidas. (Boolean).");
-			System.out.println("13. Remover figurinha das repetidas.");
+			System.out.println("9. Gravar figurinhas Repetidas que tenho em um arquivo Txt (repetidas.txt).");
+			System.out.println("10. Ler o arquivo txt (eu_tenho.txt).");
+			System.out.println("11. Ler o arquivo txt (faltantes.txt).");
+			System.out.println("12. Ler o arquivo txt (repetidas.txt).");
+			System.out.println("13. Ver as figurinhas Repetidas.");
+			System.out.println("14. Verificar se ja tem a figurinha nas repetidas. (Boolean).");
+			System.out.println("15. Listar as figurinhas coladas.");
+			System.out.println("16. Trocar Figurinha.");
 			System.out.println("0. Sair.");
 			opcao = scan.nextInt();
 			
@@ -50,29 +53,24 @@ public class App {
 				}else {
 					conta.salvar(album1);
 					System.out.println("\n*****************************************************");
-					System.out.println("Album adquirido com sucesso");
+					System.out.println("Album adquirido com sucesso\n");
 					System.out.println("*****************************************************");
 				}
 			}
 			
 			if(opcao == 2) {
+				PacotinhoFigurinha pacotinho = new PacotinhoFigurinha();
 				System.out.println("Informe o seu codigo: ");	
 				String codTitular = scan.next();
 				Album contaEncontrada = conta.encontrar(codTitular);
 				if (contaEncontrada != null) {
-					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
-					System.out.println("\n**********************************");
-					System.out.println("Figurinhas já obtidas");
-					System.out.println("**********************************");
-					for(Figurinha a : listFig) {
-						System.out.println("Numero: " + a.getNumero());
-					}
+					pacotinho.comprarPacotinhoFigurinha(contaEncontrada);
 				}else {
 					System.out.println("\n**********************************");
 					System.out.println("Album não Encontrada");
-					System.out.println("**********************************");
-				}
-			}
+					System.out.println("**********************************\n");
+				}	
+			}	
 			
 			if(opcao == 3) {
 				Figurinha figurinha = new Figurinha();
@@ -87,7 +85,7 @@ public class App {
 					if(numeroValidado == true) {
 						System.out.println("\n*****************************************");
 						System.out.printf("A figurinha numero %s informada é invalida", fig);
-						System.out.println("\n*****************************************");
+						System.out.println("*****************************************");
 					}else {
 						figurinha.setNumero(fig);
 						Figurinha figEncontrada = contaEncontrada.verificarFigurinhaExiste(fig);
@@ -116,7 +114,42 @@ public class App {
 				String codTitular = scan.next();
 				Album contaEncontrada = conta.encontrar(codTitular);
 				if (contaEncontrada != null) {
-					System.out.println("Informe o numero da figurinha: ");	
+					System.out.println("Informe o numero da figurinha: ");	if(opcao == 9) {
+						System.out.println("Informe o seu codigo: ");	
+						String codTitular = scan.next();
+						Album contaEncontrada = conta.encontrar(codTitular);
+						if (contaEncontrada != null) {
+							File file = new File("repetidas.txt");
+							try {
+								
+								if(!file.exists()) {
+									file.createNewFile();
+								}
+								
+								FileWriter fw = new FileWriter(file.getAbsoluteFile());
+								BufferedWriter bw = new BufferedWriter(fw);		
+								List<FigurinhaRepetida> listFigRep = contaEncontrada.getFigurinhasRepetidas();
+								bw.write("=======Lista de Figurinhas Repetidas========");
+								bw.newLine();		
+								for(FigurinhaRepetida figRep : listFigRep) {
+									bw.write("Numero: " + figRep.getNumero());
+									bw.newLine();
+									bw.write("===========================");
+									bw.newLine();
+								}
+								bw.close();		
+							}catch(Exception e) {
+									e.fillInStackTrace();
+							}
+							System.out.println("\n**********************************");
+							System.out.println("Abra o arquivo texto criado (repetidas.txt)");
+							System.out.println("**********************************\n");
+						}else {
+							System.out.println("\n**********************************");
+							System.out.println("Album não Encontrada");
+							System.out.println("\n**********************************\n");
+						}
+					}
 					String figura = scan.next();
 					Figurinha figurinhaVerificada = contaEncontrada.verificarFigurinhaExiste(figura);
 					if(figurinhaVerificada != null) {
@@ -136,30 +169,6 @@ public class App {
 			}
 			
 			if(opcao == 5) {
-				String s = null;
-				System.out.println("Informe o seu codigo: ");	
-				String codTitular = scan.next();
-				Album contaEncontrada = conta.encontrar(codTitular);
-				if(contaEncontrada != null) {
-					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
-					for(int i = 1; i <= 681; i++) {
-						s = Integer.toString(i);
-						for(Figurinha a : listFig)
-						{
-							if(s.equals(a.getNumero())) {
-								s = "";
-							}
-						}
-						System.out.println(s);
-					}
-				}else {
-					System.out.println("\n**********************************");
-					System.out.println("Album não encontrado");
-					System.out.println("\n**********************************");
-				}
-			}
-			
-			if(opcao == 6) {
 				System.out.println("Informe o seu codigo: ");	
 				String codTitular = scan.next();
 				Album contaEncontrada = conta.encontrar(codTitular);
@@ -180,6 +189,30 @@ public class App {
 					System.out.println("\n**********************************");
 					System.out.println("Album não encontrado");
 					System.out.println("\n**********************************\n");
+				}
+			}
+			
+			if(opcao == 6) {
+				String s = null;
+				System.out.println("Informe o seu codigo: ");	
+				String codTitular = scan.next();
+				Album contaEncontrada = conta.encontrar(codTitular);
+				if(contaEncontrada != null) {
+					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
+					for(int i = 1; i <= 681; i++) {
+						s = Integer.toString(i);
+						for(Figurinha a : listFig)
+						{
+							if(s.equals(a.getNumero())) {
+								s = "";
+							}
+						}
+						System.out.println(s);
+					}
+				}else {
+					System.out.println("\n**********************************");
+					System.out.println("Album não encontrado");
+					System.out.println("\n**********************************");
 				}
 			}
 			
@@ -257,31 +290,49 @@ public class App {
 					}
 					System.out.println("\n**********************************");
 					System.out.println("Abra o arquivo texto criado (faltantes.txt)");
-					System.out.println("\n**********************************\n");
+					System.out.println("**********************************\n");
+				}else {
+					System.out.println("\n**********************************");
+					System.out.println("Album não Encontrada");
+					System.out.println("**********************************\n");
+				}
+			}
+			
+			if(opcao == 9) {
+				System.out.println("Informe o seu codigo: ");	
+				String codTitular = scan.next();
+				Album contaEncontrada = conta.encontrar(codTitular);
+				if (contaEncontrada != null) {
+					File file = new File("repetidas.txt");
+					try {
+						
+						if(!file.exists()) {
+							file.createNewFile();
+						}
+						
+						FileWriter fw = new FileWriter(file.getAbsoluteFile());
+						BufferedWriter bw = new BufferedWriter(fw);		
+						List<FigurinhaRepetida> listFigRep = contaEncontrada.getFigurinhasRepetidas();
+						bw.write("=======Lista de Figurinhas Repetidas========");
+						bw.newLine();		
+						for(FigurinhaRepetida figRep : listFigRep) {
+							bw.write("Numero: " + figRep.getNumero());
+							bw.newLine();
+							bw.write("===========================");
+							bw.newLine();
+						}
+						bw.close();		
+					}catch(Exception e) {
+							e.fillInStackTrace();
+					}
+					System.out.println("\n**********************************");
+					System.out.println("Abra o arquivo texto criado (repetidas.txt)");
+					System.out.println("**********************************\n");
 				}else {
 					System.out.println("\n**********************************");
 					System.out.println("Album não Encontrada");
 					System.out.println("\n**********************************\n");
 				}
-			}
-			
-			if(opcao == 9) {
-				File arquivo = new File("eu_tenho.txt");
-				 try {
-					 if(!arquivo.exists()) {
-						 arquivo.createNewFile();
-					 }
-					  FileReader lerArquivo = new FileReader(arquivo);
-					  BufferedReader bf = new BufferedReader(lerArquivo);
-					  
-					  while(bf.ready()) {
-						  String linha = bf.readLine();
-						  System.out.println(linha);
-					  }  
-					  
-				 }catch(Exception e) {
-					 e.fillInStackTrace();
-				 }
 			}
 			
 			if(opcao == 10) {
@@ -297,13 +348,52 @@ public class App {
 						  String linha = bf.readLine();
 						  System.out.println(linha);
 					  }  
-					  
+					  bf.close();
 				 }catch(Exception e) {
 					 e.fillInStackTrace();
 				 }
 			}
 			
 			if(opcao == 11) {
+				File arquivo = new File("faltantes.txt");
+				 try {
+					 if(!arquivo.exists()) {
+						 arquivo.createNewFile();
+					 }
+					  FileReader lerArquivo = new FileReader(arquivo);
+					  BufferedReader bf = new BufferedReader(lerArquivo);
+					  
+					  while(bf.ready()) {
+						  String linha = bf.readLine();
+						  System.out.println(linha);
+					  }  
+					  bf.close();
+				 }catch(Exception e) {
+					 e.fillInStackTrace();
+				 }
+			}
+			
+			if(opcao == 12) {
+				File arquivo = new File("repetidas.txt");
+				try {
+					if(!arquivo.exists()) {
+						arquivo.createNewFile();
+					}
+					
+					FileReader fr = new FileReader(arquivo);
+					BufferedReader bf = new BufferedReader(fr);
+					
+					while(bf.ready()) {
+						String ler = bf.readLine();
+						System.out.println(ler);
+					}
+					bf.close();
+				}catch(Exception e) {
+					e.fillInStackTrace();
+				}
+			}
+			
+			if(opcao == 13) {
 				System.out.println("Informe o seu codigo: ");	
 				String codTitular = scan.next();
 				Album contaEncontrada = conta.encontrar(codTitular);
@@ -323,7 +413,7 @@ public class App {
 				}
 			}
 			
-			if(opcao == 12) {
+			if(opcao == 14) {
 				System.out.println("Informe o seu codigo: ");	
 				String codTitular = scan.next();
 				Album contaEncontrada = conta.encontrar(codTitular);
@@ -345,6 +435,63 @@ public class App {
 					System.out.println("Album não encontrado");
 					System.out.println("\n**********************************\n");
 				}
+			}
+			
+			if(opcao == 15) {
+				System.out.println("Informe o seu codigo: ");	
+				String codTitular = scan.next();
+				Album contaEncontrada = conta.encontrar(codTitular);
+				if (contaEncontrada != null) {
+					List<Figurinha> listFig = contaEncontrada.getFigurinhas();
+					System.out.println("\n**********************************");
+					System.out.println("Figurinhas já obtidas");
+					System.out.println("**********************************");
+					for(Figurinha a : listFig) {
+						System.out.println("Numero: " + a.getNumero());
+					}
+				}else {
+					System.out.println("\n**********************************");
+					System.out.println("Album não Encontrada");
+					System.out.println("**********************************");
+				}
+			}
+			
+			if(opcao == 16) {
+				PacotinhoFigurinha pacotinho = new PacotinhoFigurinha();
+				System.out.println("Informe o seu codigo: ");	
+				String codTitular = scan.next();
+				Album contaEncontrada = conta.encontrar(codTitular);
+				if (contaEncontrada != null) {
+					System.out.println("Informe o numero da figurinha que voce deseja trocar?");
+					String fig = scan.next();
+					FigurinhaRepetida fr = contaEncontrada.verificarFigurinhaRepetidaExiste(fig);
+					if(fr == null) {
+						System.out.println("\n***********************************************");
+						System.out.println("Voce não possui a figurinha informada para troca.");
+						System.out.println("***********************************************\n");
+					}else {
+						contaEncontrada.retirarFigurinhaRepetida(fr);
+						System.out.println("Informe a numero da figurinha que voce deseja obter?");
+						String figObter = scan.next();
+						Figurinha figEncontrada = contaEncontrada.encontrarFigurinhas(figObter);
+						if(figEncontrada != null) {
+							System.out.println("\n**********************************");
+							System.out.println("Voce já possui a figurinha no seu album.");
+							System.out.println("**********************************\n");
+						}else {
+							Figurinha figurinha = new Figurinha();
+							figurinha.setNumero(figObter);
+							contaEncontrada.colarFigurinha(figurinha);
+							System.out.println("\n**********************************");
+							System.out.println("Troca realizada com sucesso.");
+							System.out.println("**********************************\n");
+						}
+					}
+				}else {
+					System.out.println("\n**********************************");
+					System.out.println("Album não Encontrada");
+					System.out.println("**********************************\n");
+				}	
 			}
 			
 		}while(opcao != 0);{
