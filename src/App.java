@@ -114,42 +114,7 @@ public class App {
 				String codTitular = scan.next();
 				Album contaEncontrada = conta.encontrar(codTitular);
 				if (contaEncontrada != null) {
-					System.out.println("Informe o numero da figurinha: ");	if(opcao == 9) {
-						System.out.println("Informe o seu codigo: ");	
-						String codTitular = scan.next();
-						Album contaEncontrada = conta.encontrar(codTitular);
-						if (contaEncontrada != null) {
-							File file = new File("repetidas.txt");
-							try {
-								
-								if(!file.exists()) {
-									file.createNewFile();
-								}
-								
-								FileWriter fw = new FileWriter(file.getAbsoluteFile());
-								BufferedWriter bw = new BufferedWriter(fw);		
-								List<FigurinhaRepetida> listFigRep = contaEncontrada.getFigurinhasRepetidas();
-								bw.write("=======Lista de Figurinhas Repetidas========");
-								bw.newLine();		
-								for(FigurinhaRepetida figRep : listFigRep) {
-									bw.write("Numero: " + figRep.getNumero());
-									bw.newLine();
-									bw.write("===========================");
-									bw.newLine();
-								}
-								bw.close();		
-							}catch(Exception e) {
-									e.fillInStackTrace();
-							}
-							System.out.println("\n**********************************");
-							System.out.println("Abra o arquivo texto criado (repetidas.txt)");
-							System.out.println("**********************************\n");
-						}else {
-							System.out.println("\n**********************************");
-							System.out.println("Album não Encontrada");
-							System.out.println("\n**********************************\n");
-						}
-					}
+					System.out.println("Informe o numero da figurinha: ");
 					String figura = scan.next();
 					Figurinha figurinhaVerificada = contaEncontrada.verificarFigurinhaExiste(figura);
 					if(figurinhaVerificada != null) {
