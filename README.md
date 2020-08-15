@@ -1,6 +1,6 @@
 Link para Testar o Projeto: https://repl.it/@jairlopes/Projeto-7-a-1
 
-<b>“Projeto 7 a 1”</b>
+<b>“Projeto 7 a 1”</b><br><br>
 No dia 23 de junho, a aula será para apresentação do código desenvolvido. Cada aluno terá cinco minutos para apresentar o código desenvolvido, explicando as funções criadas e tirando eventuais dúvidas do professor quando a sua estratégia de desenvolvimento. Neste ano, teremos Copa do Mundo. Temporada aberta para camisas verde e amarela, vuvuzelas e outras coisas típicas deste evento que ocorre a cada quatro anos. Um fato típico desta época são as figurinhas da copa do mundo. Neste projeto, você precisa desenvolver um software que controle as figurinhas já adquiridas do álbum e as figurinhas repetidas. Cada pacote de figurinha possui 5 figurinhas. O álbum completo possui espaço para colar figurinhas que vão de 1 até 681. Vez ou outra, ao abrir um pacote de figurinhas, pode surgir uma figurinha repetida. Sua aplicação precisará controlar estas figurinhas repetidas. Utilizando a(s) estrutura(s) de dados que achar mais conveniente.
 
 <b>1.</b> Controle de figurinhas no álbum:
